@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
+import { CATEGORIES } from '@/data/categories'
 import PostCard from '@/components/PostCard'
 import { cn } from '@/utils'
 
@@ -11,24 +12,29 @@ type Props = {
 const { posts, FirstBig = false } = Astro.props
 ---
 
-<section
-	class={cn(
-		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
-		FirstBig && `md:[&>*:first-child]:col-span-2`
-	)}
->
-	{
-		posts.map(async (post) => {
-			const { remarkPluginFrontmatter } = await post.render()
+<div class='flex gap-5'>
+	<ul>
+		<li></li>
+	</ul>
+	<section
+		class={cn(
+			`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
+			FirstBig && `md:[&>*:first-child]:col-span-2`
+		)}
+	>
+		{
+			posts.map(async (post) => {
+				const { remarkPluginFrontmatter } = await post.render()
 
-			return (
-				<PostCard
-					id={post.id}
-					data={post.data}
-					slug={post.slug}
-					readTime={remarkPluginFrontmatter.minutesRead}
-				/>
-			)
-		})
-	}
-</section>
+				return (
+					<PostCard
+						id={post.id}
+						data={post.data}
+						slug={post.slug}
+						readTime={remarkPluginFrontmatter.minutesRead}
+					/>
+				)
+			})
+		}
+	</section>
+</div>
