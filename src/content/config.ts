@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content'
-import { AllSubcategoriesEnum, CategoryEnum, CATEGORIES, CategoriesMap} from '@/data/categories' 
+import { AllSubcategoriesEnum, CategoryEnum, CATEGORIES, CategoriesMap } from '@/data/categories'
 
 const blog = defineCollection({
 	schema: ({ image }) =>
@@ -12,8 +12,9 @@ const blog = defineCollection({
 				.transform((val) => new Date(val)),
 			heroImage: image(),
 			tags: z.array(z.string()),
-			Category: CategoryEnum,
-			Subcategory: AllSubcategoriesEnum.optional(),
-		})})
+			category: CategoryEnum,
+			subcategory: AllSubcategoriesEnum.optional()
+		})
+})
 
 export const collections = { blog }
