@@ -6,11 +6,34 @@ export const getCategories = async () => {
 	return Array.from(categories)
 }
 
-export const getPosts = async (max?: number) => {
-	return (await getCollection('blog'))
-		.filter((post) => !post.data.draft)
+export const getSubcategories = async (category: string) => {
+	const posts = await getCollection('blog')
+	const subcategories = new Set<string>()
+	posts.forEach((post) => {
+		if (post.data.category.toLowerCase() === category.toLowerCase()) {
+			if (!post.data.subcategory) return
+			subcategories.add(post.data.subcategory.toLowerCase())
+		}
+	})
+	return Array.from(subcategories)
+}
+
+export const getPosts = async (max?: number, category?: string, subcategory?: string) => {
+	const currentPosts = (await getCollection('blog'))
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.slice(0, max)
+
+	if (!category && !subcategory) {
+		return currentPosts
+	}
+	return currentPosts.filter((post) => {
+		const postCategory = post.data.category.toLowerCase()
+		const postSubcategory = post.data.subcategory?.toLowerCase() || ''
+		return (
+			(!category || postCategory === category.toLowerCase()) &&
+			(!subcategory || postSubcategory === subcategory.toLowerCase())
+		)
+	})
 }
 
 export const getTags: () => Promise<string[]> = async () => {

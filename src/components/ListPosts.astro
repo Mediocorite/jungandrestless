@@ -10,6 +10,12 @@ type Props = {
 }
 
 const { posts, FirstBig = false } = Astro.props
+// I need two variables
+// const we need to keep the categories and subcategories as a list and as a selected value.
+
+const categories = Object.keys(CATEGORIES)
+const subcategories = Object.values(CATEGORIES).flat()
+debugger
 ---
 
 <div class='flex gap-5'>
