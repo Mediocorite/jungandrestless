@@ -1,8 +1,10 @@
 {
-	// "extends": "./node_modules/astro/tsconfigs/strict",
+	"extends": "./node_modules/astro/tsconfigs/strict",
 	"compilerOptions": {
 		"strictNullChecks": true,
 		"baseUrl": ".",
+		"jsx": "react-jsx",
+		"jsxImportSource": "react",
 		"paths": {
 			"@/components/*": ["src/components/*.astro"],
 			"@/layouts/*": ["src/layouts/*.astro"],

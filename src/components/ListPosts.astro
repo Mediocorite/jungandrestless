@@ -10,37 +10,42 @@ type Props = {
 }
 
 const { posts, FirstBig = false } = Astro.props
-// I need two variables
-// const we need to keep the categories and subcategories as a list and as a selected value.
-
-const categories = Object.keys(CATEGORIES)
-const subcategories = Object.values(CATEGORIES).flat()
-debugger
+// Create a map for the posts.
+let map = new Map()
+posts.forEach((element) => {
+	const currentCat = element.data.category
+	const currentSubCat = element.data.subcategory
+	if (map.has(currentCat)) {
+		map.get(currentCat).add(currentSubCat)
+	} else {
+		map.set(currentCat, new Set([currentSubCat]))
+	}
+})
 ---
 
-<div class='flex gap-5'>
-	<ul>
-		<li></li>
-	</ul>
-	<section
-		class={cn(
-			`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
-			FirstBig && `md:[&>*:first-child]:col-span-2`
-		)}
-	>
-		{
-			posts.map(async (post) => {
-				const { remarkPluginFrontmatter } = await post.render()
+<div class='flex flex-col'>
+	<div class='flex gap-5'>
+		<section
+			class={cn(
+				`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
+				FirstBig && `md:[&>*:first-child]:col-span-2`
+			)}
+		>
+			{
+				posts.map(async (post) => {
+					const { remarkPluginFrontmatter } = await post.render()
 
-				return (
-					<PostCard
-						id={post.id}
-						data={post.data}
-						slug={post.slug}
-						readTime={remarkPluginFrontmatter.minutesRead}
-					/>
-				)
-			})
-		}
-	</section>
+					return (
+						<PostCard
+							id={post.id}
+							data={post.data}
+							slug={post.slug}
+							readTime={remarkPluginFrontmatter.minutesRead}
+						/>
+					)
+				})
+			}
+		</section>
+	</div>
 </div>
+<script></script>
