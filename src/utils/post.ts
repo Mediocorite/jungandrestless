@@ -18,10 +18,21 @@ export const getSubcategories = async (category: string) => {
 	return Array.from(subcategories)
 }
 
+// Use remarkable to generate minues read.
 export const getPosts = async (max?: number, category?: string, subcategory?: string) => {
-	const currentPosts = (await getCollection('blog'))
+	const posts = (await getCollection('blog'))
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.slice(0, max)
+
+	const currentPosts = await Promise.all(
+		posts.map(async (post) => {
+			const { remarkPluginFrontmatter } = await post.render()
+			return {
+				...post,
+				remarkPluginFrontmatter
+			}
+		})
+	)
 
 	if (!category && !subcategory) {
 		return currentPosts
@@ -44,7 +55,6 @@ export const getTags: () => Promise<string[]> = async () => {
 			tags.add(tag.toLowerCase())
 		})
 	})
-	console.log(tags)
 	return Array.from(tags)
 }
 

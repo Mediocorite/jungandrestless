@@ -1,9 +1,9 @@
 ---
 import AuthorHero from '@/components/AuthorHero'
 import ListCategories from '@/components/ListCategories'
-import ListPosts from '@/components/ListPosts'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
+import ListPosts from 'src/components/ListPosts'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
@@ -12,8 +12,8 @@ const posts = await getPosts(MAX_POSTS)
 <BaseLayout title='Home'>
 	<AuthorHero />
 	<!-- <TitlePage title='Blog Title' /> -->
-	<!-- <ListCategories /> -->
-	<ListPosts FirstBig={true} posts={posts} />
+	<ListCategories />
+	<ListPosts posts={posts} FirstBig={true} client:load={true} />
 </BaseLayout>
 
 <script>

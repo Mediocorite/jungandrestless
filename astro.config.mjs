@@ -9,11 +9,18 @@ import react from '@astrojs/react'
 export default defineConfig({
 	site: 'https://tiny-hotteok-8cd8b8.netlify.app/', // Write here your website url
 	markdown: {
-		remarkPlugins: [remarkReadingTime],
+		// remarkPlugins: [remarkReadingTime],
 		drafts: true,
 		shikiConfig: {
 			theme: 'material-theme-palenight',
 			wrap: true
+		}
+	},
+	vite: {
+		optimizeDeps: {
+			noDiscovery: true,
+			include: [],
+			exclude: ['reading-time']
 		}
 	},
 	integrations: [
@@ -30,6 +37,7 @@ export default defineConfig({
 		}),
 		sitemap(),
 		tailwind(),
-		react()
+		react({
+		})
 	]
 })

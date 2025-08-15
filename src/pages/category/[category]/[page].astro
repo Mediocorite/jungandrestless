@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout'
-import ListPosts from '@/components/ListPosts'
 import ListCategories from '@/components/ListCategories'
 import TitlePage from '@/components/TitlePage'
 import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
+import ListPosts from 'src/components/ListPosts'
 
 export async function getStaticPaths({ paginate }: any) {
 	const categories = await getCategories()
@@ -35,6 +35,6 @@ const posts = page.data
 <BaseLayout title={params.category}>
 	<TitlePage title={unsluglifyNameCategory} />
 	<ListCategories activeCategory={params.category} />
-	<ListPosts posts={posts} />
+	<ListPosts posts={posts} client:load />
 	<Pagination page={page} />
 </BaseLayout>
