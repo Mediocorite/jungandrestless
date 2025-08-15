@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import { remarkReadingTime } from './src/utils/readTime.ts'
 import react from '@astrojs/react'
+import devTools from "vite-plugin-devtools-json";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +17,9 @@ export default defineConfig({
 		}
 	},
 	vite: {
+		plugins: [
+			devTools(),
+		],
 		optimizeDeps: {
 			noDiscovery: true,
 			include: [],
