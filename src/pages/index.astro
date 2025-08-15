@@ -13,12 +13,13 @@ const posts = await getPosts(MAX_POSTS)
 	<AuthorHero />
 	<!-- <TitlePage title='Blog Title' /> -->
 	<ListCategories />
-	<ListPosts posts={posts} FirstBig={true} client:load={true} />
+	<ListPosts posts={posts} FirstBig={true} client:only />
 </BaseLayout>
 
 <script>
 	import { animate } from 'motion'
 	const showAnimations = localStorage.getItem('animations') === 'true'
+	console.log('SOMETHING')
 
 	if (showAnimations) {
 		animate(

@@ -1,4 +1,3 @@
-'use client'
 import { useState } from 'react'
 import { cn } from '@/utils'
 import PostCard from './PostCard'
@@ -7,8 +6,10 @@ export default function ListPosts({ posts, FirstBig = false }) {
 	const [subcategories] = useState(posts.map((e) => e.data.subcategory).filter(Boolean))
 	const [activeSubCategory, setActiveSubCategory] = useState(subcategories[0])
 	const [renderedPosts, setRenderedPosts] = useState(posts)
+	console.log('I HATE LIFE')
 
 	function applyFilter(subcategory) {
+		debugger
 		if (subcategory === 'View all') {
 			setRenderedPosts(posts)
 		} else {
@@ -17,10 +18,9 @@ export default function ListPosts({ posts, FirstBig = false }) {
 		}
 		setActiveSubCategory(subcategory)
 	}
-
 	return (
 		<div className='flex flex-col md:flex-row'>
-			{subcategories.length > 1 && (
+			{subcategories.length > 0 && (
 				<div className='mb-8 mt-3'>
 					<h3 className='text-sm font-medium text-gray-700 mb-3'>Subcategory</h3>
 					<ul className='space-y-1'>

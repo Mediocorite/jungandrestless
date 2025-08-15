@@ -18,7 +18,6 @@ export const getSubcategories = async (category: string) => {
 	return Array.from(subcategories)
 }
 
-// Use remarkable to generate minues read.
 export const getPosts = async (max?: number, category?: string, subcategory?: string) => {
 	const posts = (await getCollection('blog'))
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
