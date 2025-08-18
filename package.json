@@ -30,7 +30,9 @@
 		"astro-font": "^0.0.72",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
-		"reading-time-estimator": "^1.14.0"
+		"react-image": "^4.1.0",
+		"reading-time-estimator": "^1.14.0",
+		"vite-plugin-devtools-json": "^1.0.0"
 	},
 	"devDependencies": {
 		"@astrojs/mdx": "2.0.3",
