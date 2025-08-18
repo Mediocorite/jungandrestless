@@ -1,0 +1,10 @@
+---
+import TitlePage from '@/components/TitlePage'
+import BaseLayout from '@/layouts/BaseLayout'
+import PsychologyResourcesCard from './Resources'
+---
+
+<BaseLayout title={'Resources'}>
+	<TitlePage title={'Resource'} />
+	<PsychologyResourcesCard client:load />
+</BaseLayout>
