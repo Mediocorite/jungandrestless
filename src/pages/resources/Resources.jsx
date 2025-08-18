@@ -186,17 +186,20 @@ export default function PsychologyResourcesCard() {
 			<div className='flex flex-col lg:flex-row gap-6'>
 				<div className='lg:w-64 flex-shrink-0'>
 					<div className='lg:sticky lg:top-4'>
-						<h3 className='text-lg font-semibold mb-4 text-gray-900'>Psychology Resources</h3>
+						<h3 className='text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100'>
+							Psychology Resources
+						</h3>
 						<div className='flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0'>
 							{resourcesData.map((category) => (
 								<button
 									key={category.id}
 									onClick={() => setActiveCategory(category.id)}
-									className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap lg:whitespace-normal text-left transition-colors ${
-										activeCategory === category.id
-											? 'bg-purple-100 text-purple-900'
-											: 'text-gray-700 hover:bg-gray-100'
-									}`}
+									className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap lg:whitespace-normal text-left transition-colors
+                                        ${
+																					activeCategory === category.id
+																						? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100'
+																						: 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'
+																				}`}
 								>
 									{category.name}
 								</button>
@@ -206,9 +209,11 @@ export default function PsychologyResourcesCard() {
 				</div>
 
 				<div className='flex-1'>
-					<div className='bg-white rounded-xl shadow-lg border border-gray-200 p-6'>
+					<div className='bg-white rounded-xl shadow-lg border border-gray-200 p-6 dark:bg-gray-900 dark:border-gray-700'>
 						<div className='mb-6'>
-							<h2 className='text-2xl font-bold text-gray-900 mb-2'>{currentCategory?.name}</h2>
+							<h2 className='text-2xl font-bold text-gray-900 mb-2 dark:text-gray-100'>
+								{currentCategory?.name}
+							</h2>
 							<div className='w-12 h-1 bg-purple-500 rounded-full'></div>
 						</div>
 
@@ -216,17 +221,19 @@ export default function PsychologyResourcesCard() {
 							{currentCategory?.items.map((item, index) => (
 								<div
 									key={index}
-									className='border-b border-gray-100 pb-4 last:border-b-0 last:pb-0'
+									className='border-b border-gray-100 pb-4 last:border-b-0 last:pb-0 dark:border-gray-800'
 								>
 									<div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2'>
 										<div className='flex-1'>
-											<h3 className='font-semibold text-gray-900 text-base leading-tight'>
+											<h3 className='font-semibold text-gray-900 text-base leading-tight dark:text-gray-100'>
 												{item.title}
 											</h3>
 											{item.description && (
-												<p className='text-gray-600 text-sm mt-1'>{item.description}</p>
+												<p className='text-gray-600 text-sm mt-1 dark:text-gray-300'>
+													{item.description}
+												</p>
 											)}
-											<div className='flex flex-wrap gap-3 mt-2 text-sm text-gray-500'>
+											<div className='flex flex-wrap gap-3 mt-2 text-sm text-gray-500 dark:text-gray-400'>
 												{item.author && <span>by {item.author}</span>}
 												{item.year && <span>({item.year})</span>}
 												{item.institution && <span>{item.institution}</span>}
@@ -237,8 +244,8 @@ export default function PsychologyResourcesCard() {
 							))}
 						</div>
 
-						<div className='mt-6 pt-4 border-t border-gray-100'>
-							<p className='text-sm text-gray-500'>
+						<div className='mt-6 pt-4 border-t border-gray-100 dark:border-gray-800'>
+							<p className='text-sm text-gray-500 dark:text-gray-400'>
 								Showing {currentCategory?.items.length} {currentCategory?.name.toLowerCase()}
 							</p>
 						</div>
