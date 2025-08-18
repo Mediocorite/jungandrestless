@@ -121,7 +121,9 @@ export default function ListPosts({ posts, FirstBig = false }) {
 			<div className='flex flex-col xl:flex-row gap-8'>
 				{/* Sidebar with subcategories */}
 				<aside className='xl:w-64 w-full flex-shrink-0'>
-					<h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>Categories</h3>
+					<h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
+						Subcategories
+					</h3>
 					<nav className='flex xl:flex-col gap-2 overflow-x-auto xl:overflow-x-visible pb-2 xl:pb-0'>
 						{subcategories.map((subcategory) => (
 							<button
