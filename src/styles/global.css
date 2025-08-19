@@ -1,46 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
-	/* body {
-		transition: background-color 0.5s ease;
-	} */
+  /* Base font */
+  * {
+    font-family: 'Inknut Antiqua', serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
-	* {
-		font-family: 'Inknut Antiqua', serif;
-		font-weight: 400;
-		font-style: normal;
-	}
+  /* Code inside prose */
+  .prose code {
+    @apply text-base;
+  }
 
-	.prose code {
-		@apply text-base;
-	}
+  /* Prose headings with dark mode support */
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-zinc-800 dark:text-zinc-100;
+  }
 
-	/* prose styles here */
-	.prose h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		@apply text-zinc-800 dark:text-zinc-100   !important;
-	}
-
-	html.dark .shiki,
-	html.dark .shiki span {
-		color: var(--shiki-dark) !important;
-		background-color: theme(colors.gray.900) !important;
-	}
+  /* Shiki syntax highlighting (dark mode) */
+  html.dark .shiki,
+  html.dark .shiki span {
+    color: var(--shiki-dark);
+    background-color: theme('colors.gray.900');
+  }
 }
 
+/* Glassmorphism utility */
 .glass {
-	background: rgba(57, 56, 56, 0.52);
-	backdrop-filter: blur(13px) saturate(150%);
-	-webkit-backdrop-filter: blur(13px) saturate(150%);
-	z-index: -1;
+  background: rgba(57, 56, 56, 0.52);
+  backdrop-filter: blur(13px) saturate(150%);
+  -webkit-backdrop-filter: blur(13px) saturate(150%);
+  z-index: -1;
 }
 
+/* Custom shadow utility */
 .shadow {
-	box-shadow: -5px 3px 8px 1px rgba(0, 0, 0, 0.12);
+  box-shadow: -5px 3px 8px 1px rgba(0, 0, 0, 0.12);
 }
