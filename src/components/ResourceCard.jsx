@@ -184,19 +184,19 @@ export default function PsychologyResourcesCard() {
 	const currentCategory = resourcesData.find((cat) => cat.id === activeCategory)
 
 	return (
-		<div className='w-full max-w-full px-3 sm:px-4 sm:max-w-2xl md:max-w-4xl lg:max-w-7xl mx-auto'>
+		<div className='w-full overflow-hidden max-w-full px-3 sm:px-4 sm:max-w-2xl md:max-w-4xl lg:max-w-7xl mx-auto'>
 			<div className='flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6'>
 				<div className='w-full lg:w-64 flex-shrink-0'>
 					<div className='lg:sticky lg:top-4'>
 						<h3 className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-900 dark:text-gray-100'>
 							Psychology Resources
 						</h3>
-						<div className='flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 -mx-3 sm:-mx-4 lg:mx-0 px-3 sm:px-4 lg:px-0'>
+						<div className='flex flex-wrap lg:flex-col gap-2 overflow-hidden lg:overflow-visible pb-2 lg:pb-0'>
 							{resourcesData.map((category) => (
 								<button
 									key={category.id}
 									onClick={() => setActiveCategory(category.id)}
-									className={`px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap lg:whitespace-normal text-left transition-colors flex-shrink-0 ${
+									className={`px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium text-left transition-colors flex-shrink-0 ${
 										activeCategory === category.id
 											? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100'
 											: 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
