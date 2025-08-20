@@ -2,16 +2,7 @@ import { cn } from '@/utils'
 import { useState } from 'react'
 
 const Img = ({ src, alt, className, width, height, loading = 'lazy' }) => {
-	return (
-		<img
-			src={src || '/placeholder.svg'}
-			alt={alt}
-			className={className}
-			width={width}
-			height={height}
-			loading={loading}
-		/>
-	)
+	return <img src={src || '/placeholder.svg'} alt={alt} className={className} loading={loading} />
 }
 
 const PostCard = ({ id, data, slug, readTime, isLarge = false }) => {
@@ -21,7 +12,7 @@ const PostCard = ({ id, data, slug, readTime, isLarge = false }) => {
 			id={id}
 			className={cn(
 				'group relative overflow-hidden rounded-lg bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow duration-200',
-				'h-full flex flex-col'
+				'h-full flex flex-col min-w-0'
 			)}
 		>
 			<a className='flex-1 flex flex-col' href={`/post/${slug}/`}>
@@ -35,7 +26,7 @@ const PostCard = ({ id, data, slug, readTime, isLarge = false }) => {
 						<Img
 							src={heroImage.src}
 							alt={`img of ${title}`}
-							className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
+							className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 aspect-[3/1]'
 							width={600}
 							height={200}
 							loading='lazy'
@@ -112,7 +103,7 @@ export default function ListPosts({ posts, FirstBig = false }) {
 			: posts.filter((post) => post.data.subcategory === selectedCategory)
 
 	return (
-		<div className='w-full px-4 py-8'>
+		<div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-hidden'>
 			<div className='mb-8'>
 				<h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-2'>Latest Posts</h2>
 				<div className='w-12 h-1 bg-blue-600 rounded'></div>
@@ -124,13 +115,13 @@ export default function ListPosts({ posts, FirstBig = false }) {
 					<h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
 						Subcategories
 					</h3>
-					<nav className='flex xl:flex-col gap-2 overflow-x-auto xl:overflow-x-visible pb-2 xl:pb-0'>
+					<nav className='flex flex-wrap xl:flex-col gap-2 xl:overflow-visible'>
 						{subcategories.map((subcategory) => (
 							<button
 								key={subcategory}
 								onClick={() => setSelectedCategory(subcategory)}
 								className={cn(
-									'whitespace-nowrap xl:w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
+									'text-left px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap',
 									selectedCategory === subcategory
 										? 'bg-purple-100 text-black'
 										: 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -143,14 +134,14 @@ export default function ListPosts({ posts, FirstBig = false }) {
 				</aside>
 
 				{/* Posts grid */}
-				<main className='flex-1 min-w-0'>
-					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-fr'>
+				<main className='flex-1 min-w-0 overflow-hidden'>
+					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'>
 						{filteredPosts.map((post, index) => {
 							const isLarge = FirstBig && index === 0
 							return (
 								<div
 									key={post.id}
-									className={cn(isLarge && 'sm:col-span-2 lg:col-span-2 xl:col-span-2')}
+									className={cn('min-w-0', isLarge && 'sm:col-span-2 lg:col-span-2 xl:col-span-2')}
 								>
 									<PostCard
 										id={post.id}
