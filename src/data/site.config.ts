@@ -9,9 +9,9 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	author: 'AnzarM/DinaishM', // Site author
-	title: 'Jung And Restless', // Site title.
-	description: 'Personal blog site created by Anzar Malik, for the Dinaish Mistry.', // Description to display in the meta tags
+	author: 'Dinaish Mistry',
+	title: 'Autism Practitioner',
+	description: 'A blog about psychology, philosophy, and self-development.',
 	lang: 'en-GB',
 	ogLocale: 'en_GB',
 	shareMessage: 'Share this post', // Message to share a post on social media
