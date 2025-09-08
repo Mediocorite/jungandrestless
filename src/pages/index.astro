@@ -1,6 +1,7 @@
 ---
 import AuthorHero from '@/components/AuthorHero'
 import ListCategories from '@/components/ListCategories'
+import Publication from '@/components/Publication'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 import ListPosts from 'src/components/ListPosts'
@@ -14,6 +15,7 @@ const posts = await getPosts(MAX_POSTS)
 	<!-- <TitlePage title='Blog Title' /> -->
 	<ListCategories />
 	<ListPosts posts={posts} FirstBig={true} client:only />
+	<Publication />
 </BaseLayout>
 
 <script>
