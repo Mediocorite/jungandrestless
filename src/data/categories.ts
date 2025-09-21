@@ -6,6 +6,7 @@ export const CATEGORIES = {
 	'Research Review': [
 		'Social Psychology',
 		'Health Psychology',
+		'Organizational Psychology',
 		'Neuropsychology',
 		'Cognitive Psychology',
 		'Developmental Psychology',
