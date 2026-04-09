@@ -3,11 +3,11 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import react from '@astrojs/react'
-import devTools from "vite-plugin-devtools-json";
+import devTools from 'vite-plugin-devtools-json'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://tiny-hotteok-8cd8b8.netlify.app/', // Write here your website url
+	site: 'https://jungandrestless.com/', // Write here your website url
 	markdown: {
 		// remarkPlugins: [remarkReadingTime],
 		drafts: true,
@@ -17,9 +17,7 @@ export default defineConfig({
 		}
 	},
 	vite: {
-		plugins: [
-			devTools(),
-		],
+		plugins: [devTools()],
 		optimizeDeps: {
 			noDiscovery: true,
 			include: [],
@@ -32,15 +30,14 @@ export default defineConfig({
 			shikiConfig: {
 				experimentalThemes: {
 					light: 'vitesse-light',
-					dark: 'material-theme-palenight',
-				  },
+					dark: 'material-theme-palenight'
+				},
 				wrap: true
 			},
 			drafts: true
 		}),
 		sitemap(),
 		tailwind(),
-		react({
-		})
+		react({})
 	]
 })
