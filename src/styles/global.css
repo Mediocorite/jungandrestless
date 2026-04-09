@@ -26,9 +26,6 @@
     @apply text-zinc-800 dark:text-zinc-100;
   }
 
-  .prose p {
-    @apply text-3xl
-  }
 
   /* Shiki syntax highlighting (dark mode) */
   html.dark .shiki,
