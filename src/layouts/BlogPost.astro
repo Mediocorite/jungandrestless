@@ -14,7 +14,7 @@ type Props = {
 }
 
 const { data, readTime, headings, id } = Astro.props
-const { title, description, pubDate, heroImage, tags } = data
+const { title, description, pubDate, heroImage, tags, category, subcategory } = data
 
 const articleDate = pubDate.toISOString()
 ---
@@ -36,6 +36,13 @@ const articleDate = pubDate.toISOString()
 						- {readTime}
 					</p>
 				</div>
+				{
+					(category || subcategory) && (
+						<p class='text-center text-sm text-indigo-500 dark:text-indigo-400 font-semibold uppercase tracking-widest'>
+							{[category, subcategory].filter(Boolean).join(' • ')}
+						</p>
+					)
+				}
 				<h1 class='text-center text-4xl md:text-6xl md:pb-2.5 font-semibold'>
 					{title}
 				</h1>
