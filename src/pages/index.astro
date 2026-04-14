@@ -6,15 +6,14 @@ import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 import ListPosts from 'src/components/ListPosts'
 
-const MAX_POSTS = 5 // max number of posts to show on the home page
-const posts = await getPosts(MAX_POSTS)
+const posts = await getPosts()
 ---
 
 <BaseLayout title='Home'>
 	<AuthorHero />
 	<!-- <TitlePage title='Blog Title' /> -->
 	<ListCategories />
-	<ListPosts posts={posts} FirstBig={true} client:only />
+	<ListPosts posts={posts} FirstBig={true} paginate={true} client:only />
 	<Publication />
 </BaseLayout>
 

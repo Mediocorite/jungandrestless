@@ -89,8 +89,10 @@ const PostCard = ({ id, data, slug, readTime, isLarge = false }) => {
 	)
 }
 
-export default function ListPosts({ posts, FirstBig = false }) {
+export default function ListPosts({ posts, FirstBig = false, paginate = false }) {
 	const [selectedCategory, setSelectedCategory] = useState('View All')
+	const [currentPage, setCurrentPage] = useState(1)
+	const POSTS_PER_PAGE = 6
 
 	const subcategories = [
 		'View All',
@@ -101,6 +103,16 @@ export default function ListPosts({ posts, FirstBig = false }) {
 		selectedCategory === 'View All'
 			? posts
 			: posts.filter((post) => post.data.subcategory === selectedCategory)
+
+	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+	const currentPosts = paginate
+		? filteredPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE)
+		: filteredPosts
+
+	const handleCategoryChange = (val) => {
+		setSelectedCategory(val)
+		setCurrentPage(1)
+	}
 
 	return (
 		<div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-hidden'>
@@ -119,7 +131,7 @@ export default function ListPosts({ posts, FirstBig = false }) {
 						{subcategories.map((subcategory) => (
 							<button
 								key={subcategory}
-								onClick={() => setSelectedCategory(subcategory)}
+								onClick={() => handleCategoryChange(subcategory)}
 								className={cn(
 									'text-left px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap',
 									selectedCategory === subcategory
@@ -136,8 +148,8 @@ export default function ListPosts({ posts, FirstBig = false }) {
 				{/* Posts grid */}
 				<main className='flex-1 min-w-0 overflow-hidden'>
 					<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6'>
-						{filteredPosts.map((post, index) => {
-							const isLarge = FirstBig && index === 0
+						{currentPosts.map((post, index) => {
+							const isLarge = FirstBig && index === 0 && currentPage === 1
 							return (
 								<div
 									key={post.id}
@@ -154,6 +166,45 @@ export default function ListPosts({ posts, FirstBig = false }) {
 							)
 						})}
 					</div>
+
+					{/* Pagination Controls */}
+					{paginate && totalPages > 1 && (
+						<div className='flex justify-center items-center gap-4 mt-8'>
+							<button
+								onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+								disabled={currentPage === 1}
+								className='flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-white border border-gray-300 rounded-lg focus:outline-none hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800'
+							>
+								<svg className='w-5 h-5 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth='2'
+										d='M15 19l-7-7 7-7'
+									/>
+								</svg>
+								Previous
+							</button>
+							<span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
+								Page {currentPage} of {totalPages}
+							</span>
+							<button
+								onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+								disabled={currentPage === totalPages}
+								className='flex items-center justify-center px-4 h-10 text-base font-medium text-black bg-white border border-gray-300 rounded-lg focus:outline-none hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800'
+							>
+								Next
+								<svg className='w-5 h-5 ml-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth='2'
+										d='M9 5l7 7-7 7'
+									/>
+								</svg>
+							</button>
+						</div>
+					)}
 				</main>
 			</div>
 		</div>
