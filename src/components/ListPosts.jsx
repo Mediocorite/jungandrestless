@@ -92,7 +92,7 @@ const PostCard = ({ id, data, slug, readTime, isLarge = false }) => {
 export default function ListPosts({ posts, FirstBig = false, paginate = false }) {
 	const [selectedCategory, setSelectedCategory] = useState('View All')
 	const [currentPage, setCurrentPage] = useState(1)
-	const POSTS_PER_PAGE = 6
+	const POSTS_PER_PAGE = 5
 
 	const subcategories = [
 		'View All',
